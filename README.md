@@ -4,8 +4,8 @@ A data science project that classifies Lichess rapid players into playing-style
 archetypes based on their opening and development behavior — built end to end,
 from data collection through an interactive Streamlit app.
 
-**<img width="919" height="496" alt="image" src="https://github.com/user-attachments/assets/7ebc31e6-2113-4ff1-9aae-86b513e16e5c" />
-**
+<img width="919" height="496" alt="image" src="https://github.com/user-attachments/assets/7ebc31e6-2113-4ff1-9aae-86b513e16e5c" />
+
 Enter any Lichess username and get a
 style profile based on their recent rated rapid games.
 
