@@ -13,7 +13,7 @@ Most chess analysis tools tell you *how good* a move was (via engine
 evaluation). This project asks a different question: **how does this player
 tend to behave in the opening and early middlegame?**
 
-Using unsupervised clustering (K-Means) on ~5,000 rated rapid players, two
+Using unsupervised clustering (K-Means) on 9,684 rated rapid players, two
 distinct style archetypes emerged from the data:
 
 - 🐇 **Rapid Developer** — pushes pawns into contested territory early,
@@ -54,7 +54,7 @@ players are deliberate developers, and vice versa.)
 |---|---|
 | `mine_rapid_usernames.py` | Mines a diverse pool of rated-rapid usernames from a monthly Lichess archive |
 | `player_style_pipeline.py` | Fetches a player's games, extracts features, aggregates to one row per player, checkpoints to SQLite |
-| `players.sqlite` | Snapshot dataset — 9,649 players' aggregated features (see note below) |
+| `players.sqlite` | Snapshot dataset — 9,684 players' aggregated features (see note below) |
 | `scaler.pkl` | Fitted `StandardScaler` used at both training and inference time |
 | `kmeans_model.pkl` | Fitted `KMeans` model (k=2) |
 | `app.py` | Streamlit app — look up any Lichess username and get a live style classification |
@@ -109,6 +109,8 @@ python player_style_pipeline.py \
   --db players.sqlite \
   --max-games 50 \
   --min-games 20
+
+Note that rebuilding the dataset means having all initial features which are about 16
 ```
 
 Then retrain K-Means on the resulting dataset and re-save `scaler.pkl` /
