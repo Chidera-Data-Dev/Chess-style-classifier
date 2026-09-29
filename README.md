@@ -1,6 +1,3 @@
-# chess-style-classifier
-Clustering Lichess rapid players into playing-style archetypes based on opening/development behavior, from data pipeline to a live Streamlit classifier.
-
 # ♟️ Chess Player Style Classifier
 
 A data science project that classifies Lichess rapid players into playing-style
@@ -57,13 +54,13 @@ players are deliberate developers, and vice versa.)
 |---|---|
 | `mine_rapid_usernames.py` | Mines a diverse pool of rated-rapid usernames from a monthly Lichess archive |
 | `player_style_pipeline.py` | Fetches a player's games, extracts features, aggregates to one row per player, checkpoints to SQLite |
-| `players.sqlite` | Snapshot dataset — ~5,000 players' aggregated features (see note below) |
+| `players.sqlite` | Snapshot dataset — 9,649 players' aggregated features (see note below) |
 | `scaler.pkl` | Fitted `StandardScaler` used at both training and inference time |
 | `kmeans_model.pkl` | Fitted `KMeans` model (k=2) |
 | `app.py` | Streamlit app — look up any Lichess username and get a live style classification |
 
-> **Note on `players.sqlite`:** this is a fixed snapshot collected on
-> [DATE] — it does not update automatically. The app uses it only to hold
+> **Note on `test_players.sqlite`:** this is a fixed snapshot collected on
+> [9/20/2026] — it does not update automatically. The app uses it only to hold
 > the pre-trained model artifacts' training data for reference; live
 > lookups in the app pull fresh data from Lichess at query time.
 
@@ -76,7 +73,7 @@ just load the included snapshot:
 import sqlite3
 import pandas as pd
 
-conn = sqlite3.connect("players.sqlite")
+conn = sqlite3.connect("test_players.sqlite")
 df = pd.read_sql("SELECT * FROM player_features", conn)
 ```
 
