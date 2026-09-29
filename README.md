@@ -1,6 +1,6 @@
 # ♟️ Chess Player Style Classifier
 
-A data science project that classifies Lichess rapid players into playing-style
+A data science/ML project that classifies Lichess rapid players into playing-style
 archetypes based on their opening and development behavior, built end to end,
 from data collection through an interactive Streamlit app.
 
