@@ -51,17 +51,13 @@ players are deliberate developers, and vice versa.)
    computes the same features, and assigns them to the nearest trained
    cluster.
 
-## Repo contents
+## Brief Repo content Explanation
 
 | File | Purpose |
 |---|---|
 | `mine_rapid_usernames.py` | Mines a diverse pool of rated-rapid usernames from a monthly Lichess archive |
 | `player_style_pipeline.py` | Fetches a player's games, extracts features, aggregates to one row per player, checkpoints to SQLite |
 | `players.sqlite` | Snapshot dataset — 9,684 players' aggregated features (see note below) |
-| `scaler.pkl` | Fitted `StandardScaler` used at both training and inference time |
-| `kmeans_model.pkl` | Fitted `KMeans` model (k=2) |
-| `frontend.py` | Streamlit app — look up any Lichess username and get a live style classification |
-| `backend.py` | Holds most of the functions in executing the frontend |
 
 > **Note on `test_players.sqlite`:** this is a fixed snapshot collected on
 > [9/20/2026] — it does not update automatically. The app uses it only to hold
@@ -83,7 +79,7 @@ df = pd.read_sql("SELECT * FROM player_features", conn)
 
 ## Running the app
 
-Requires `app.py`, `scaler.pkl`, and `kmeans_model.pkl` in the same folder.
+Requires `frontend.py`, `scaler_.pkl`, and `model.pkl` in the same folder.
 
 ```bash
 pip install streamlit joblib pandas requests python-chess
@@ -98,27 +94,13 @@ a live style classification.
 Only needed if you want to mine a fresh set of players rather than use the
 included snapshot.
 
-```bash
-pip install python-chess requests zstandard
-
-# 1. Mine a pool of usernames from a monthly archive
-python mine_rapid_usernames.py \
-  --url https://database.lichess.org/standard/lichess_db_standard_rated_YYYY-MM.pgn.zst \
-  --out usernames.txt \
-  --target 5000
-
-# 2. Fetch games and extract features per player (checkpointed — safe to resume)
-python player_style_pipeline.py \
-  --usernames usernames.txt \
-  --db players.sqlite \
-  --max-games 50 \
-  --min-games 20
+- `Usernames.ipynb` run this in your notebook to get usernames for extracting games (you could change the year and month in this)
+- `game_extractor.ipynb` run this in your notebook to get extracted and aggregated games from your mined usernmes
 
 Note that rebuilding the dataset means having all initial features which are about (16)
-```
 
-Then retrain K-Means on the resulting dataset and re-save `scaler.pkl` /
-`kmeans_model.pkl` before redeploying the app.
+Then retrain K-Means on the resulting dataset and re-save `scaler_.pkl` /
+`model.pkl` before redeploying the app.
 
 ## Tech stack
 
