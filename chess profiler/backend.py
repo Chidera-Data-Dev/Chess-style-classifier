@@ -19,8 +19,6 @@ FEATURE_COLUMNS = [
     "avg_minor_pieces_developed"
 ]
 
-# Fill these in yourself based on inspecting your own cluster means table —
-# the keys must match the cluster numbers KMeans actually assigns (0, 1, 2, ...).
 CLUSTER_LABELS = {
     0: "Deliberate Developer",
     1: "Rapid Developer",
@@ -66,10 +64,10 @@ MIN_GAMES = 10 # lesser than training's min_games, since a live lookup should st
 # Cached loaders — model/scaler only need to load once per session
 @st.cache_resource
 def load_model_artifacts():
-    scaler_path = os.path.join("deliverables", "scaler_.pkl")
-    kmeans_path = os.path.join("deliverables", "model.pkl")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    scaler_path = os.path.join(current_dir, "deliverables", "scaler_.pkl")
+    kmeans_path = os.path.join(current_dir, "deliverables", "model.pkl")
     
-    # Load and return the artifacts
     scaler = joblib.load(scaler_path)
     kmeans = joblib.load(kmeans_path)
     
@@ -112,10 +110,6 @@ def classify_player(username, scaler, kmeans):
     feature_df = pd.DataFrame([row])[FEATURE_COLUMNS]
  
     if feature_df.isnull().any().any():
-        # a feature never occurred across ALL of this player's games
-        # (e.g. never castled in any game) — fill with the column's
-        # training-time mean via the scaler's stored mean, so the point
-        # doesn't break scaling/prediction.
         for col in FEATURE_COLUMNS:
             if feature_df[col].isnull().any():
                 feature_df[col] = feature_df[col].fillna(0)
