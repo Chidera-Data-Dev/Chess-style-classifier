@@ -59,7 +59,8 @@ players are deliberate developers, and vice versa.)
 | `players.sqlite` | Snapshot dataset — 9,684 players' aggregated features (see note below) |
 | `scaler.pkl` | Fitted `StandardScaler` used at both training and inference time |
 | `kmeans_model.pkl` | Fitted `KMeans` model (k=2) |
-| `app.py` | Streamlit app — look up any Lichess username and get a live style classification |
+| `frontend.py` | Streamlit app — look up any Lichess username and get a live style classification |
+| `backend.py` | Holds most of the functions in executing the frontend |
 
 > **Note on `test_players.sqlite`:** this is a fixed snapshot collected on
 > [9/20/2026] — it does not update automatically. The app uses it only to hold
