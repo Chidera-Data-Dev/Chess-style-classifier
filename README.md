@@ -4,8 +4,9 @@ A data science project that classifies Lichess rapid players into playing-style
 archetypes based on their opening and development behavior — built end to end,
 from data collection through an interactive Streamlit app.
 
-**[<img width="919" height="496" alt="image" src="https://github.com/user-attachments/assets/7ebc31e6-2113-4ff1-9aae-86b513e16e5c" />
-]** — enter any Lichess username and get a
+**<img width="919" height="496" alt="image" src="https://github.com/user-attachments/assets/7ebc31e6-2113-4ff1-9aae-86b513e16e5c" />
+**
+Enter any Lichess username and get a
 style profile based on their recent rated rapid games.
 
 ## What it does
@@ -111,7 +112,7 @@ python player_style_pipeline.py \
   --max-games 50 \
   --min-games 20
 
-Note that rebuilding the dataset means having all initial features which are about 16
+Note that rebuilding the dataset means having all initial features which are about (16)
 ```
 
 Then retrain K-Means on the resulting dataset and re-save `scaler.pkl` /
@@ -125,9 +126,9 @@ SQLite · Streamlit · Lichess public API
 ## Limitations & honest notes
 
 - Style labels are based on a small, interpretable feature set focused on
-  opening/development behavior — they describe a *pattern*, not a
+  opening/development behavior, they describe a *pattern*, not a
   comprehensive personality profile.
 - Cluster assignments are fixed to this specific training run; a different
   training set could shift cluster boundaries slightly.
-- Lichess does not support user profile pictures — the app uses
+- Lichess does not support user profile pictures, the app uses
   cluster-themed avatars in place of real photos.
